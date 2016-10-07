@@ -1,0 +1,96 @@
+extends layout
+
+block content
+  div(class="navbar navbar-inverse navbar-fixed-top" style="background-color: #5bc0de" role="navigation")
+    div(class="navbar-inner")
+      div(class="container")
+        a(class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse")
+          span(class="icon-bar")
+          span(class="icon-bar")
+          span(class="icon-bar")
+        a(class="navbar-brand navbar-left" style="color: #fff" href="/") 彩票策略测试工具demo
+  br
+  br
+  br
+  div(class="container" id="app")
+      form(action="/" method="post" class="text-info" role="form")
+          div(class="input-group")
+              span(class="input-group-addon") 本金：
+              input(type="text" name="principal" class="form-control" v-model="principal" required:true)
+          br
+          div(class="input-group")
+              span(class="input-group-addon")赔率：
+              select(name="odds" v-model="odds")
+                  option(value="0" selected="")="0倍"
+                  option(value="1")="1倍"
+                  option(value="2")="2倍"
+                  option(value="3")="3倍"
+                  option(value="4")="4倍"
+                  option(value="5")="5倍"
+                  option(value="6")="6倍"
+                  option(value="7")="7倍"
+                  option(value="8")="8倍"
+                  option(value="9")="9倍"
+          br
+          div(class="input-group")
+              span(class="input-group-addon") 投注号码： 
+              input(name="bet" type="checkbox" class="form-control" value="0" v-model="bet")
+              span(class="input-group-addon") 0  
+              input(name="bet" type="checkbox" class="form-control" value="1" v-model="bet")
+              span(class="input-group-addon") 1  
+              input(name="bet" type="checkbox" class="form-control" value="2" v-model="bet")
+              span(class="input-group-addon") 2  
+              input(name="bet" type="checkbox" class="form-control" value="3" v-model="bet")
+              span(class="input-group-addon") 3  
+              input(name="bet" type="checkbox" class="form-control" value="4" v-model="bet")
+              span(class="input-group-addon") 4  
+              input(name="bet" type="checkbox" class="form-control" value="5" v-model="bet")
+              span(class="input-group-addon") 5  
+              input(name="bet" type="checkbox" class="form-control" value="6" v-model="bet")
+              span(class="input-group-addon") 6  
+              input(name="bet" type="checkbox" class="form-control" value="7" v-model="bet")
+              span(class="input-group-addon") 7  
+              input(name="bet" type="checkbox" class="form-control" value="8" v-model="bet")
+              span(class="input-group-addon") 8  
+              input(name="bet" type="checkbox" class="form-control" value="9" v-model="bet")
+              span(class="input-group-addon") 9  
+          br
+          div(class="input-group")
+              span(class="input-group-addon") 投注金额：
+              input(type="text" class="form-control col-lg-5" name="money" v-model="money")
+              span(class="input-group-addon") 元
+          br
+          div(class="input-group")
+              span(class="input-group-addon") 投注金额递增倍数：
+              input(type="text" class="form-control" name="multiply" v-model="multiply") 
+              span(class="input-group-addon") 倍
+          br
+          div(class="input-group")
+              span(class="input-group-addon") 期数：
+              input(type="text" class="form-control" name="times" v-model="times")
+              span(class="input-group-addon") 期
+          br
+          button(v-on:click="send" class="btn btn-info btn-sm")投注 {{ msg }}
+  script(type="text/javascript").
+    caipiao = new Vue({
+      el: '#app',
+      data: {
+        principal: "", 
+        odds: "", 
+        money: "", 
+        times: "", 
+        bet: [],
+        multiply: "" 
+      },
+      methods: {
+        send: function() {
+    	  $.ajax({
+    	    url: "/", 
+    	    type: "POST", 
+    	    async : true, 
+    	    dataType: "json", 
+    	    data: caipiao.principal
+    	  });
+        }
+      }
+    });
