@@ -1,5 +1,6 @@
-var express = require('express');
-var router = express.Router();
+"use strict";
+const express = require('express');
+const router = express.Router();
 const compute = require('../util/compute');
 
 /* GET home page. */
